@@ -28,10 +28,10 @@ class UmkmController extends Controller
     }
 
     public function indexAdmin(Request $request){
-        $datas = Umkm::with(['produk'=>function($query) use($request){
+        $datas = Umkm::with(['kota','provinsi','produk'=>function($query) use($request){
             $query->whereNull('deleted_at');
         }])->get();
-        return view($this->view.'index',['datas' => $datas]);
+        return view($this->view.'index_admin',['datas' => $datas]);
     }
     public function create(Request $request){
         return view($this->view.'create',[]);
@@ -255,6 +255,6 @@ class UmkmController extends Controller
         return back()->with('success', 'Berhasil Menghapus UMKM!');
 
     }
-    public function detail(Request $request, $id){
+    public function detail(Request $request, $id){}
 
 }
