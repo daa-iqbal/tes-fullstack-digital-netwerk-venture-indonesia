@@ -24,7 +24,10 @@ Route::group([ 'prefix'=>'umkm'], function() {
         Route::get('datatable', 'ProdukController@datatable')->name('produk.datatable');
     });
 });
-
+Route::group([ 'prefix'=>'umkm' ], function() {
+    Route::post('get-kota', 'UmkmController@getKota')->name('umkm.get-kota');
+});
+ 
 Auth::routes();
 Route::group(['middleware' => ['auth']], function() {
     Route::group([ 'prefix'=>'umkm' ], function() {

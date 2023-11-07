@@ -34,7 +34,25 @@ class UmkmController extends Controller
         return view($this->view.'index_admin',['datas' => $datas]);
     }
     public function create(Request $request){
-        return view($this->view.'create',[]);
+        $datasProvinsi = Provinsi::with([])->whereNull('deleted_at')->orderBy('name')->get();
+        return view($this->view.'create',['datasProvinsi' => $datasProvinsi]);
+    }
+    public function getKota(Request $request){
+        $datasKota = [];
+        $result = new stdClass();
+        if(is_null($request->provinsi_id)){
+            $result->response_code = 200;
+            $result->message = "Success";
+            $result->data = [];
+            return response()->json($result);
+
+        }
+        $datasKota = Kota::with(['provinsi'])->where('provinsi_id',$request->provinsi_id)->whereNull('deleted_at')->get();
+        $result->response_code = 200;
+        $result->message = "Success";
+        $result->data = $datasKota;
+
+        return response()->json($result);
     }
 
 
