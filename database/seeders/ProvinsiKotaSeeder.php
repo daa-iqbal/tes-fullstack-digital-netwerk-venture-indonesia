@@ -50,6 +50,9 @@ class ProvinsiKotaSeeder extends Seeder
                         'created_by_id' => 0,
                     ];
                     $createProvinsi = Provinsi::create($arrCreateProvinsi);
+                    $this->command->info('Provinsi '.$dataProvinsi->name.' has been inserted');
+
+                    $this->command->info(print_r($dataProvinsi));
 
                     $response = $client->request('GET', 'https://emsifa.github.io/api-wilayah-indonesia/api/regencies/'.$dataProvinsi->id.'.json');
                     $data = $response->getBody()->getContents();
@@ -61,6 +64,8 @@ class ProvinsiKotaSeeder extends Seeder
                             'created_by_id' => 0,
                         ];
                         $createKota = Kota::create($arrCreateKota);
+                        $this->command->info('Kota '.$dataKota->name.' has been inserted');
+                        $this->command->info(print_r($dataKota));
                     }
 
                 }

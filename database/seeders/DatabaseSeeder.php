@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ConfirmationTypeSeeder::class);
         $this->call(NotifikasiActionSeeder::class);
         $this->call(NotifikasiGroupSeeder::class);
+        $this->call(ProvinsiKotaSeeder::class);
         
     }
 }

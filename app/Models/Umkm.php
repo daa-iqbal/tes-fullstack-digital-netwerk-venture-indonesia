@@ -17,7 +17,8 @@ class Umkm extends Model
 
     ];
 
-    protected static function boot() {
+    protected static function boot()
+    {
         parent::boot();
         static::creating(function ($model) {
             if (empty($model->{$model->getKeyName()})) {
@@ -25,6 +26,7 @@ class Umkm extends Model
             }
         });
     }
+   
 
      /**
      * Get the value indicating whether the IDs are incrementing.
