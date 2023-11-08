@@ -31,7 +31,7 @@
                                 <p>
                                     <b> Search </b>
                                 </p>
-                                <input type="text" id="search-field-datatable" class="form-control" placeholder="keyword">
+                                <input  type="text" @input="handleSearchFieldDatatable" id="search-field-datatable" class="form-control" placeholder="keyword">
                             </div>
 
                         </div>
@@ -188,13 +188,24 @@
         return table;
     }
     new Vue({
-        el: '#content-vue',
+        el: '#app',
         data : {
             selectedCategories : [],
+            keywordSearch : '',
 
         },
         methods : {
+            handleSearchFieldDatatable(event){
+                console.log(event.target.value);
+                let keywordSearch = event.target.value;
+                let linkDatatable = "{{route('umkm.datatable')}}";
+                linkDatatable += "?";
+                if(keywordSearch){
+                    linkDatatable += '&'+'keyword_search='+keywordSearch;
+                }
 
+                reloadDatatable(linkDatatable);
+            },
 
 
 
@@ -205,15 +216,9 @@
             datatable();
 
             $(document).delegate( "#search-field-datatable", "input", function() {
-                let keywordSearch = $(this).val();
-                console.log(keywordSearch);
-                let linkDatatable = "{{route('umkm.datatable')}}";
-                linkDatatable += "?";
-                if(keywordSearch){
-                    linkDatatable += '&'+'keyword_search='+keywordSearch;
-                }
-                console.log(linkDatatable);
-                reloadDatatable(linkDatatable);
+
+
+
 
 
             });
