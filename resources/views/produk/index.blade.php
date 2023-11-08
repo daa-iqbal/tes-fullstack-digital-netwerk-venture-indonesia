@@ -36,7 +36,7 @@
                         </div>
 
 
-                        <table class="table table-bordered mt-1">
+                        <table class="table table-bordered mt-1" id="list-datatable">
                             <thead>
                                 <tr>
                                     <th scope="col">Nama</th>
@@ -64,6 +64,7 @@
 <script>
     function datatable(){
         var url = "{{route('produk.datatable', ['umkmId'=>$data->id])}}";
+
         var table = $('#list-datatable').DataTable({
             "dom" : "Bfrtip",
             "responsive"        : true,
