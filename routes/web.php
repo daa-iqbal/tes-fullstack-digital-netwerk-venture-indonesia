@@ -35,9 +35,9 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('edit/{id}', 'UmkmController@edit')->name('umkm.edit');
         Route::get('index-admin', 'UmkmController@indexAdmin')->name('umkm.index-admin');
 
-        Route::post('update/{id}', 'UmkmController@update')->name('umkm.update');
+        Route::put('update/{id}', 'UmkmController@update')->name('umkm.update');
         Route::post('store', 'UmkmController@store')->name('umkm.store');
-        Route::post('delete/{id}', 'UmkmController@delete')->name('umkm.delete');
+        Route::delete('delete/{id}', 'UmkmController@delete')->name('umkm.delete');
         Route::get('detail/{id}', 'UmkmController@detail')->name('umkm.detail');
         Route::group([ 'prefix'=>'produk' ], function() {
             Route::get('create/{umkmId}', 'ProdukController@create')->name('produk.create');

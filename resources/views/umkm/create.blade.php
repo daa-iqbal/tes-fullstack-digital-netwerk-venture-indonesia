@@ -71,7 +71,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="kota_id">Propinsi</label>
+                                    <label for="kota_id">Kota</label>
                                     <select name="kota_id" id="kota_id" class="form-control" required>
                                         <option >--Pilih Kota--</option>
                                         
@@ -164,11 +164,12 @@ var app = new Vue({
         $('#kota_id').select2();
         $(document).delegate('#provinsi_id',"change",function(){
             
-            let provinsiId = $(this).val(); 
-            axios.post('{{route("umkm.get-kota")}}',{
-                    provinsi_id: provinsiId,
-                   
-                }, {
+            let provinsiId = $(this).val();
+            $('#kota_id').empty();
+            $('#kota_id').val('');
+            let params = new FormData();
+            params.append('provinsi_id', provinsiId); 
+            axios.post('{{route("umkm.get-kota")}}',params, {
                     headers: {
                     'Content-Type': 'multipart/form-data',
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -176,7 +177,26 @@ var app = new Vue({
                 })
                 .then(function (response) {
                     // handle success
-                    console.log(response);
+                    console.log(response.data);
+                    optionsSelect = [];
+                    if(response.data.response_code == 200 || response.data.response_code == '200'){
+
+                        $('#kota_id').append('<option value="">--Pilih Kota--</option>');
+
+                        for (var i = 0; i < response.data.data.length; i++) {
+                            let optionSelect = {
+                                id: response.data.data[i].id,
+                                text: response.data.data[i].name
+                            };
+                            optionsSelect.push(optionSelect);
+
+                            $('#kota_id').append('<option value="'+response.data.data[i].id+'">'+ response.data.data[i].name +'</option>')
+                        }
+
+
+
+                    }
+
                 })
                 .catch(function (error) {
                     // handle error

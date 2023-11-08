@@ -28,9 +28,9 @@ class UmkmController extends Controller
     }
 
     public function indexAdmin(Request $request){
-        $datas = Umkm::with(['kota','provinsi','produk'=>function($query) use($request){
+        $datas = Umkm::with(['kota','provinsi','produks'=>function($query) use($request){
             $query->whereNull('deleted_at');
-        }])->get();
+        }])->whereNull('deleted_at')->get();
         return view($this->view.'index_admin',['datas' => $datas]);
     }
     public function create(Request $request){
@@ -42,7 +42,7 @@ class UmkmController extends Controller
         $result = new stdClass();
         if(is_null($request->provinsi_id)){
             $result->response_code = 200;
-            $result->message = "Success";
+            $result->message = "Success, Tidak ada data";
             $result->data = [];
             return response()->json($result);
 
@@ -58,10 +58,10 @@ class UmkmController extends Controller
 
     public function edit(Request $request, $id){
 
-        $data = Umkm::with([])->whereNull('deleted_at')->where('id',$id)->first();
-
-
-        return view($this->view.'edit',['data'=>$data]);
+        $data = Umkm::with(['provinsi','kota'])->where('id',$id)->first();
+        $datasProvinsi = Provinsi::with([])->whereNull('deleted_at')->orderBy('name')->get();
+        $datasKota = Kota::with([])->whereNull('deleted_at')->where('provinsi_id',$data->provinsi_id)->orderBy('name')->get();
+        return view($this->view.'edit',['data'=>$data, 'datasProvinsi' => $datasProvinsi,'datasKota'=>$datasKota]);
     }
     public function index(Request $request, $umkmId){
         $datas = Umkm::with(['produk'=>function($query) use($request){
@@ -163,7 +163,7 @@ class UmkmController extends Controller
             // something went wrong
         }
 
-        return redirect()->route($this->route.'index_admin',)->with('success', 'Edit UMKM berhasil!');
+        return redirect()->route($this->route.'index-admin',)->with('success', 'Edit UMKM berhasil!');
 
     }
     public function store(Request $request){
@@ -196,7 +196,7 @@ class UmkmController extends Controller
             $imgFile1 = $request->file('id_file_photo_1');
             $imgFile2 = $request->file('id_file_photo_2');
             $imgFile3 = $request->file('id_file_photo_3');
-            $arrUpdate = [
+            $arrCreate = [
                 'name'                  => $request->name,
                 'alamat'                => $request->alamat,
                 'provinsi_id'           => $request->provinsi_id,
@@ -226,7 +226,7 @@ class UmkmController extends Controller
             }
 
 
-            $create = Umkm::create($arrUpdate);
+            $create = Umkm::create($arrCreate);
 
 
            DB::commit();
@@ -238,7 +238,7 @@ class UmkmController extends Controller
             // something went wrong
         }
 
-        return redirect()->route($this->route.'index_admin')
+        return redirect()->route($this->route.'index-admin')
         ->with('success', '1 UMKM Berhasil Ditambahkan!');
 
     }

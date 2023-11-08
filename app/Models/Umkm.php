@@ -56,4 +56,8 @@ class Umkm extends Model
     {
         return $this->belongsTo('App\Models\Kota', 'kota_id', 'id');
     }
+    public function produks()
+    {
+        return $this->hasMany('App\Models\Produk', 'umkm_id', 'id');
+    }
 }
