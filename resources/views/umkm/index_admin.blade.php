@@ -51,19 +51,21 @@
                                     <td>{{ $data->deskripsi }}</td>
                                     <td>{{ $data->nama_pemilik }}</td>
                                     <td>
-                                        <img src="{{url('/img_produks/').'/'.$data->id_file_photo_1}}"  width="200" height="160">
+                                        <img src="{{url('/img_umkms/').'/'.$data->id_file_photo_1}}"  width="200" height="160">
                                         <br>
                                         <br>
-                                        <img src="{{url('/img_produks/').'/'.$data->id_file_photo_2}}"  width="200" height="160">
+                                        <img src="{{url('/img_umkms/').'/'.$data->id_file_photo_2}}"  width="200" height="160">
                                         <br>
                                         <br>
-                                        <img src="{{url('/img_produks/').'/'.$data->id_file_photo_3}}"  width="200" height="160">
+                                        <img src="{{url('/img_umkms/').'/'.$data->id_file_photo_3}}"  width="200" height="160">
                                     </td>
                                     <td class="text-center">
                                         <form onsubmit="return confirm('Apakah Anda Yakin ?');"
                                             action="{{ route('umkm.delete', $data->id) }}" method="POST">
                                             <a href="{{ route('umkm.edit', $data->id) }}"
                                                 class="btn btn-sm btn-primary"><i class="material-icons">mode_edit</i></a>
+                                            <a href="{{ route('produk.index-admin', $data->id) }}"
+                                                    class="btn btn-sm btn-primary" style="background-color:#708090; border-color: #708090;color:white;"><i class="material-icons">view_module</i></a>
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger"><i class="material-icons">delete</i></button>
@@ -72,7 +74,7 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td class="text-center text-mute" colspan="9">Data post  tersedia</td>
+                                    <td class="text-center text-mute" colspan="9">Data UMKM tidak adas</td>
                                 </tr>
                                 @endforelse
                             </tbody>

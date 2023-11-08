@@ -31,12 +31,13 @@
 
                 <div class="card border-0 shadow rounded">
                     <div class="card-body">
-                        <h1>Edit UMKM</h1>
-                            <form action="{{ route('umkm.update',['id'=>$data->id]) }}" method="POST" enctype="multipart/form-data">
+                        <h1>Edit Produk UMKM {{$data->umkm->name}}</h1>
+                            <form action="{{ route('produk.update',['id'=>$data->id]) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
+                                <input type="hidden" id="umkm_id" name="umkm_id" value="{{$data->umkm_id}}">
                                 <div class="form-group">
-                                    <label for="name">Nama UMKM</label>
+                                    <label for="name">Nama Produk</label>
                                     <input type="text" class="form-control @error('name') is-invalid @enderror"
                                         name="name" id="name" value="{{ $data->name }}" required>
 
@@ -47,14 +48,13 @@
                                     </div>
                                     @enderror
                                 </div>
-
                                 <div class="form-group">
-                                    <label for="alamat">Alamat UMKM</label>
-                                    <input type="text" class="form-control @error('alamat') is-invalid @enderror"
-                                        name="alamat" id="alamat" value="{{ $data->alamat }}" required>
+                                    <label for="kode">Kode Produk</label>
+                                    <input type="text" class="form-control @error('kode') is-invalid @enderror"
+                                        name="kode" id="kode" value="{{ $data->kode }}" required>
 
                                     <!-- error message untuk title -->
-                                    @error('alamat')
+                                    @error('kode')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -62,43 +62,12 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="provinsi_id">Propinsi</label>
-                                    <select v-model="selectedPropinsiId" name="provinsi_id" id="provinsi_id"  class="form-control" required>
-
-                                        @foreach ($datasProvinsi as $item)
-                                            <option value="{{$item->id}}" @if($data->provinsi_id == $item->id) selected @endif>{{$item->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="kota_id">Kota</label>
-                                    <select name="kota_id" id="kota_id" class="form-control" required>
-                                        <option >--Pilih Kota--</option>
-                                        @foreach ($datasKota as $item)
-                                            <option value="{{$item->id}}" @if($data->kota_id==$item->id) selected @endif>{{$item->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="nama_pemilik">Nama Pemilik</label>
-                                    <input type="text" id="nama_pemilik" class="form-control @error('nama_pemilik') is-invalid @enderror"
-                                        name="nama_pemilik" value="{{ $data->nama_pemilik }}" required>
+                                    <label for="harga">Harga Produk (Rp)</label>
+                                    <input type="number" class="form-control @error('harga') is-invalid @enderror"
+                                        name="harga" id="harga" value="{{ $data->harga }}" required>
 
                                     <!-- error message untuk title -->
-                                    @error('nama_pemilik')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="personal_kontak">Personal Kontak</label>
-                                    <input type="text" id="personal_kontak" class="form-control @error('personal_kontak') is-invalid @enderror"
-                                        name="personal_kontak" value="{{ $data->personal_kontak }}" required>
-
-                                    <!-- error message untuk title -->
-                                    @error('personal_kontak')
+                                    @error('harga')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -107,21 +76,6 @@
 
 
 
-                                <div class="form-group">
-                                    <label for="deskripsi">Deskripsi</label>
-                                    <textarea
-                                        name="deskripsi" id="deskripsi"
-                                        class="form-control @error('deskripsi') is-invalid @enderror"
-                                        rows="5"
-                                        required>{{ $data->deskripsi }}</textarea>
-
-                                    <!-- error message untuk content -->
-                                    @error('deskripsi')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
                                 <div class="form-group">
                                     <label for="id_file_photo_1">File Gambar 1</label>
                                     <img src="{{url('/img_produks/').'/'.$data->id_file_photo_1}}"  width="200" height="160">
@@ -142,7 +96,7 @@
                                 </div>
                                 <br>
                                 <button type="submit" class="btn btn-md btn-primary">Simpan</button>
-                                <a href="{{ route('umkm.index-admin') }}" class="btn btn-md btn-secondary">kembali</a>
+                                <a href="{{ route('produk.index-admin',$data->umkm_id) }}" class="btn btn-md btn-secondary">kembali</a>
 
                         </form>
 

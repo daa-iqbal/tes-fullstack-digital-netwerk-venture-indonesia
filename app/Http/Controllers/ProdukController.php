@@ -29,10 +29,10 @@ class ProdukController extends Controller
     }
 
     public function indexAdmin(Request $request, $umkmId){
-        $data = Umkm::with(['produk'=>function($query) use($request){
+        $data = Umkm::with(['produks'=>function($query) use($request){
             $query->whereNull('deleted_at');
         }])->where('id',$umkmId)->first();
-        return view($this->view.'index',['data' => $data]);
+        return view($this->view.'index_admin',['data' => $data]);
     }
     public function create(Request $request,$umkmId){
         $data = Umkm::with([])->where('id',$umkmId)->first();
@@ -52,7 +52,7 @@ class ProdukController extends Controller
         return view($this->view.'edit',['data'=>$data]);
     }
     public function index(Request $request, $umkmId){
-        $data = Umkm::with(['produk'=>function($query) use($request){
+        $data = Umkm::with(['produks'=>function($query) use($request){
             $query->whereNull('deleted_at');
         }])->where('id',$umkmId)->first();
         return view($this->view.'index',['data' => $data]);
@@ -139,7 +139,7 @@ class ProdukController extends Controller
             // something went wrong
         }
 
-        return redirect()->route($this->route.'index_admin',['umkmId'=>$request->umkm_id])->with('success', 'Edit Produk berhasil!');
+        return redirect()->route($this->route.'index-admin',['umkmId'=>$request->umkm_id])->with('success', 'Edit Produk berhasil!');
 
     }
     public function store(Request $request){
@@ -208,7 +208,7 @@ class ProdukController extends Controller
             // something went wrong
         }
 
-        return redirect()->route($this->route.'index_admin',['umkmId'=>$request->umkm_id])
+        return redirect()->route($this->route.'index-admin',['umkmId'=>$request->umkm_id])
         ->with('success', '1 Produk Berhasil Ditambahkan!');
 
     }

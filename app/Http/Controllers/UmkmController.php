@@ -133,19 +133,19 @@ class UmkmController extends Controller
             ];
             if($imgFile1){
                 $namaFile = time()."_".$imgFile1->getClientOriginalName();
-                $dirUpload = 'img_produks';
+                $dirUpload = 'img_umkms';
                 $imgFile1->move($dirUpload,$namaFile);
                 $arrUpdate['id_file_photo_1'] = $namaFile;
             }
             if($imgFile2){
                 $namaFile = time()."_".$imgFile2->getClientOriginalName();
-                $dirUpload = 'img_produks';
+                $dirUpload = 'img_umkms';
                 $imgFile2->move($dirUpload,$namaFile);
                 $arrUpdate['id_file_photo_2'] = $namaFile;
             }
             if($imgFile3){
                 $namaFile = time()."_".$imgFile3->getClientOriginalName();
-                $dirUpload = 'img_produks';
+                $dirUpload = 'img_umkms';
                 $imgFile3->move($dirUpload,$namaFile);
                 $arrUpdate['id_file_photo_3'] = $namaFile;
             }
@@ -210,19 +210,19 @@ class UmkmController extends Controller
                 $namaFile = time()."_".$imgFile1->getClientOriginalName();
                 $dirUpload = 'img_produks';
                 $imgFile1->move($dirUpload,$namaFile);
-                $arrUpdate['id_file_photo_1'] = $namaFile;
+                $arrCreate['id_file_photo_1'] = $namaFile;
             }
             if($imgFile2){
                 $namaFile = time()."_".$imgFile2->getClientOriginalName();
                 $dirUpload = 'img_produks';
                 $imgFile2->move($dirUpload,$namaFile);
-                $arrUpdate['id_file_photo_2'] = $namaFile;
+                $arrCreate['id_file_photo_2'] = $namaFile;
             }
             if($imgFile3){
                 $namaFile = time()."_".$imgFile3->getClientOriginalName();
                 $dirUpload = 'img_produks';
                 $imgFile3->move($dirUpload,$namaFile);
-                $arrUpdate['id_file_photo_3'] = $namaFile;
+                $arrCreate['id_file_photo_3'] = $namaFile;
             }
 
 

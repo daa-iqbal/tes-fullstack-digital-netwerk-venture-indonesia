@@ -27,7 +27,7 @@ Route::group([ 'prefix'=>'umkm'], function() {
 Route::group([ 'prefix'=>'umkm' ], function() {
     Route::post('get-kota', 'UmkmController@getKota')->name('umkm.get-kota');
 });
- 
+
 Auth::routes();
 Route::group(['middleware' => ['auth']], function() {
     Route::group([ 'prefix'=>'umkm' ], function() {
@@ -42,11 +42,11 @@ Route::group(['middleware' => ['auth']], function() {
         Route::group([ 'prefix'=>'produk' ], function() {
             Route::get('create/{umkmId}', 'ProdukController@create')->name('produk.create');
             Route::get('edit/{id}', 'ProdukController@edit')->name('produk.edit');
-            Route::get('index-admin/{umkmId}', 'ProdukController@index')->name('produk.index-admin');
+            Route::get('index-admin/{umkmId}', 'ProdukController@indexAdmin')->name('produk.index-admin');
 
-            Route::post('update/{id}', 'ProdukController@update')->name('produk.update');
+            Route::put('update/{id}', 'ProdukController@update')->name('produk.update');
             Route::post('store', 'ProdukController@store')->name('produk.store');
-            Route::post('delete/{id}', 'ProdukController@delete')->name('produk.delete');
+            Route::delete('delete/{id}', 'ProdukController@delete')->name('produk.delete');
             Route::get('detail/{id}', 'ProdukController@detail')->name('produk.detail');
 
         });
