@@ -63,23 +63,29 @@ class UmkmController extends Controller
         $datasKota = Kota::with([])->whereNull('deleted_at')->where('provinsi_id',$data->provinsi_id)->orderBy('name')->get();
         return view($this->view.'edit',['data'=>$data, 'datasProvinsi' => $datasProvinsi,'datasKota'=>$datasKota]);
     }
-    public function index(Request $request, $umkmId){
-        $datas = Umkm::with(['produk'=>function($query) use($request){
+    public function index(Request $request){
+        $datas = Umkm::with(['provinsi','kota','produks'=>function($query) use($request){
             $query->whereNull('deleted_at');
         }])->get();
         return view($this->view.'index',['datas' => $datas]);
     }
-    public function datatable(Request $request,$umkmId){
+    public function datatable(Request $request){
 
-        $datas = Umkm::with(['produks'])->whereNull('deleted_at');
+        $datas = Umkm::with(['provinsi','kota','produks'])->whereNull('deleted_at');
 
         if($request->keyword_search){
             $datas = $datas->where(function($query) use ($request){
+
                 $query->whereRaw('LOWER(name) LIKE ?',['%'.strtolower($request->keyword_search).'%'])
+                ->orWhereRaw('LOWER(alamat) LIKE ?',['%'.strtolower($request->keyword_search).'%'])
+                ->orWhereRaw('LOWER(personal_kontak) LIKE ?',['%'.strtolower($request->keyword_search).'%'])
+                ->orWhereRaw('LOWER(deskripsi) LIKE ?',['%'.strtolower($request->keyword_search).'%'])
+                ->orWhereRaw('LOWER(nama_pemilik) LIKE ?',['%'.strtolower($request->keyword_search).'%'])
                 ->orWhereHas('kota',function($queryChild) use($request){
-                    $queryChild->orwhere('LOWER(name) LIKE ?',['%'.strtolower($request->keyword_search).'%']);
-                })->orWhereHas('provinsi',function($queryChild) use($request){
-                    $queryChild->orwhere('LOWER(name) LIKE ?',['%'.strtolower($request->keyword_search).'%']);
+                    $queryChild->whereRaw('LOWER(name) LIKE ?',['%'.strtolower($request->keyword_search).'%']);
+                })
+                ->orWhereHas('provinsi',function($queryChild) use($request){
+                    $queryChild->whereRaw('LOWER(name) LIKE ?',['%'.strtolower($request->keyword_search).'%']);
                 });
 
 

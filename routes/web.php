@@ -20,8 +20,8 @@ Route::group([ 'prefix'=>'umkm'], function() {
     Route::get('index', 'UmkmController@index')->name('umkm.index');
     Route::get('datatable', 'UmkmController@datatable')->name('umkm.datatable');
     Route::group([ 'prefix'=>'produk'], function() {
-        Route::get('index', 'ProdukController@index')->name('produk.index');
-        Route::get('datatable', 'ProdukController@datatable')->name('produk.datatable');
+        Route::get('index/{umkmId}', 'ProdukController@index')->name('produk.index');
+        Route::get('datatable/{umkmId}', 'ProdukController@datatable')->name('produk.datatable');
     });
 });
 Route::group([ 'prefix'=>'umkm' ], function() {
