@@ -32,7 +32,7 @@
                                 <tr>
                                     <th scope="col">Nama</th>
                                     <th scope="col">Kode</th>
-                                    <th scope="col">Harga (Rp)</th>
+                                    <th scope="col">Harga(Rp)</th>
                                     <th scope="col">Gambar</th>
                                     <th scope="col">Action</th>
                                 </tr>

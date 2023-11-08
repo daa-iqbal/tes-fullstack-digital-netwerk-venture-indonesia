@@ -166,7 +166,7 @@
                         searchable: false,
                         render: function(data){
                             let aksi =  '';
-                            let linkProduks = "{{route('produk.index-admin', ':id')}}";
+                            let linkProduks = "{{route('produk.index', ':id')}}";
                                 linkProduks = linkProduks.replace(':id', data.id);
 
                                 aksi +='<a href="'+linkProduks+'" class="btn btn-sm btn-primary" style="background-color:#708090; border-color: #708090;color:white;"><i class="material-icons">view_module</i></a>';

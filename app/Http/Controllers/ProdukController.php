@@ -64,7 +64,8 @@ class ProdukController extends Controller
         if($request->keyword_search){
             $datas = $datas->where(function($query) use ($request){
                 $query->whereRaw('LOWER(name) LIKE ?',['%'.strtolower($request->keyword_search).'%'])
-                ->orwhereRaw('LOWER(kode) LIKE ?',['%'.strtolower($request->keyword_search).'%']);
+                ->orwhereRaw('LOWER(kode) LIKE ?',['%'.strtolower($request->keyword_search).'%'])
+                ->orwhere('harga',$request->keyword_search);
 
             });
 
