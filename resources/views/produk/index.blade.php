@@ -36,7 +36,7 @@
                         </div>
 
 
-                        <table class="table table-bordered mt-1" id="list-datatable">
+                        <table class="table table-responsive table-bordered mt-2" id="list-datatable">
                             <thead>
                                 <tr>
                                     <th scope="col">Nama</th>
@@ -51,6 +51,7 @@
 
                             </tbody>
                         </table>
+
                     </div>
                 </div>
             </div>
@@ -68,11 +69,11 @@
 
         var table = $('#list-datatable').DataTable({
             "dom" : "Bfrtip",
-            "responsive"        : true,
+            "responsive"        : false,
             "buttons"           : [
                                     //"copy", "csv", "excel", "pdf", "print"
                                 ],
-            "autoWidth"       :       true,
+            "autoWidth"       :       false,
             "scrollX"         :       true,
             "scrollCollapse"  :       true,
             "bFilter"         :      false,
