@@ -42,8 +42,9 @@
                                     <th scope="col">Nama</th>
                                     <th scope="col">Kode</th>
                                     <th scope="col">Harga(Rp)</th>
-                                    <th scope="col">Gambar</th>
-
+                                    <th scope="col">Gambar 1</th>
+                                    <th scope="col">Gambar 2</th>
+                                    <th scope="col">Gambar 3</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -80,6 +81,8 @@
             "columnDefs": [
 
                             { "orderable": false, "targets": 3 },
+                            { "orderable": false, "targets": 4 },
+                            { "orderable": false, "targets": 5 },
 
 
 
@@ -122,14 +125,31 @@
                         searchable: false,
                         render: function(data){
                             let publicDirectoryImages = "{{url('/img_produks/')}}";
-                            let imagesElement = '<img src="'+publicDirectoryImages+'/'+data.id_file_photo_1+'"  width="200" height="160">'+
-                                '<br>'+
-                                '<br>'+
-                                '<img src="'+publicDirectoryImages+'/'+data.id_file_photo_2+'"  width="200" height="160">'+
-                                '<br>'+
-                                '<br>'+
-                                '<img src="'+publicDirectoryImages+'/'+data.id_file_photo_3+'"  width="200" height="160">';
+                            let imagesElement = '<img src="'+publicDirectoryImages+'/'+data.id_file_photo_1+'"  width="200" height="160">';
 
+
+                            return imagesElement;
+                        }
+
+                    },
+                    {
+                        data: null,
+                        searchable: false,
+                        render: function(data){
+                            let publicDirectoryImages = "{{url('/img_produks/')}}";
+                            let imagesElement = '<img src="'+publicDirectoryImages+'/'+data.id_file_photo_2+'"  width="200" height="160">';
+
+
+                            return imagesElement;
+                        }
+
+                    },
+                    {
+                        data: null,
+                        searchable: false,
+                        render: function(data){
+                            let publicDirectoryImages = "{{url('/img_produks/')}}";
+                            let imagesElement = '<img src="'+publicDirectoryImages+'/'+data.id_file_photo_3+'"  width="200" height="160">';
 
                             return imagesElement;
                         }
